@@ -1,0 +1,70 @@
+{
+  "records": [
+    {
+      "id": "rec-1",
+      "owner": "A. Lakshmi",
+      "survey": "142/B",
+      "village": "Velpur",
+      "extent": "2.4 acres",
+      "status": "Verified"
+    },
+    {
+      "id": "rec-2",
+      "owner": "M. Ravi Kumar",
+      "survey": "87/A",
+      "village": "Kothapalli",
+      "extent": "1.1 acres",
+      "status": "Needs survey"
+    },
+    {
+      "id": "rec-3",
+      "owner": "S. Fathima",
+      "survey": "211/C",
+      "village": "Ramanapeta",
+      "extent": "0.8 acres",
+      "status": "Verified"
+    },
+    {
+      "id": "rec-4",
+      "owner": "G. Prasad",
+      "survey": "19/D",
+      "village": "Velpur",
+      "extent": "3.0 acres",
+      "status": "Dispute review"
+    },
+    {
+      "id": "rec-5",
+      "owner": "B. Kavya",
+      "survey": "58/A",
+      "village": "Mallaram",
+      "extent": "1.7 acres",
+      "status": "Verified"
+    }
+  ],
+  "requests": [
+    {
+      "id": "req-1",
+      "name": "A. Lakshmi",
+      "village": "Velpur",
+      "type": "Land mutation",
+      "details": "Mutation pending after inheritance update.",
+      "status": "Review"
+    },
+    {
+      "id": "req-2",
+      "name": "R. Narender",
+      "village": "Mallaram",
+      "type": "Water supply issue",
+      "details": "Borewell repair request near ward 4.",
+      "status": "Open"
+    },
+    {
+      "id": "req-3",
+      "name": "S. Fathima",
+      "village": "Ramanapeta",
+      "type": "Income certificate",
+      "details": "Certificate needed for scholarship application.",
+      "status": "Closed"
+    }
+  ]
+}

@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Janmabhoomi Civic Desk</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="role-gate">
+      <div class="brand">
+        <div class="brand-mark">JB</div>
+        <div>
+          <strong>Janmabhoomi</strong>
+          <span>Civic data services</span>
+        </div>
+      </div>
+      <label class="role-picker">
+        Select interface
+        <select id="roleSelect">
+          <option value="consumer">Consumer</option>
+          <option value="admin">Admin</option>
+        </select>
+      </label>
+      <div id="apiStatus" class="api-status">Connecting...</div>
+    </header>
+
+    <main>
+      <section id="consumerApp" class="consumer-shell role-view active">
+        <section class="consumer-hero">
+          <div>
+            <p class="eyebrow">Consumer portal</p>
+            <h1>Find land records and request civic services without standing in line.</h1>
+            <p class="hero-text">Search verified village records, submit a certificate or grievance request, and track what the office is doing next.</p>
+            <div class="hero-actions">
+              <a href="#consumerRequest" class="primary-button">Create request</a>
+              <a href="#consumerRecords" class="secondary-button">Search records</a>
+            </div>
+          </div>
+        </section>
+
+        <section id="consumerRecords" class="consumer-grid">
+          <div class="public-panel wide">
+            <div class="panel-heading">
+              <h2>Land record search</h2>
+              <span>Read-only for consumers</span>
+            </div>
+            <label class="field">
+              Search by owner, survey number, village, or status
+              <input id="consumerSearch" type="search" placeholder="Example: Lakshmi, 142/B, Velpur" />
+            </label>
+            <div id="consumerRecordsList" class="record-list"></div>
+          </div>
+
+          <div class="public-panel">
+            <div class="panel-heading">
+              <h2>Request tracker</h2>
+              <span>Latest cases</span>
+            </div>
+            <div id="consumerRequestsList" class="request-list compact"></div>
+          </div>
+        </section>
+
+        <section id="consumerRequest" class="consumer-grid request-only">
+          <div class="public-panel">
+            <div class="panel-heading">
+              <h2>Create service request</h2>
+              <span>No login needed</span>
+            </div>
+            <form id="consumerRequestForm" class="form-stack">
+              <label class="field">
+                Citizen name
+                <input name="name" required placeholder="Enter full name" />
+              </label>
+              <label class="field">
+                Village
+                <input name="village" required placeholder="Village or ward" />
+              </label>
+              <label class="field">
+                Service type
+                <select name="type">
+                  <option>Land mutation</option>
+                  <option>Income certificate</option>
+                  <option>Crop damage claim</option>
+                  <option>Water supply issue</option>
+                  <option>Welfare eligibility</option>
+                </select>
+              </label>
+              <label class="field">
+                Details
+                <textarea name="details" required placeholder="Describe what help is needed"></textarea>
+              </label>
+              <button class="primary-button" type="submit">Submit request</button>
+            </form>
+          </div>
+        </section>
+      </section>
+
+      <section id="adminApp" class="admin-shell role-view">
+        <aside class="admin-sidebar">
+          <div>
+            <p class="eyebrow">Admin console</p>
+            <h1>Data operations</h1>
+          </div>
+          <nav class="admin-nav">
+            <button class="admin-tab active" data-admin-view="adminOverview">Overview</button>
+            <button class="admin-tab" data-admin-view="adminRecords">Records CRUD</button>
+            <button class="admin-tab" data-admin-view="adminRequests">Requests CRUD</button>
+            <button class="admin-tab" data-admin-view="adminUpload">Upload data</button>
+          </nav>
+        </aside>
+
+        <section class="admin-main">
+          <section id="adminOverview" class="admin-view active">
+            <div class="metric-grid">
+              <article class="metric"><span>Total records</span><strong id="adminRecordCount">0</strong></article>
+              <article class="metric"><span>Total requests</span><strong id="adminRequestCount">0</strong></article>
+              <article class="metric"><span>Open workload</span><strong id="adminOpenCount">0</strong></article>
+              <article class="metric"><span>Verified parcels</span><strong id="adminVerifiedCount">0</strong></article>
+            </div>
+            <div class="ops-panel">
+              <h2>Operations feed</h2>
+              <div id="adminFeed" class="request-list"></div>
+            </div>
+          </section>
+
+          <section id="adminRecords" class="admin-view">
+            <div class="ops-grid">
+              <form id="recordForm" class="ops-panel form-stack">
+                <div class="panel-heading">
+                  <h2 id="recordFormTitle">Create land record</h2>
+                  <button id="cancelRecordEdit" class="ghost-button" type="button">Clear</button>
+                </div>
+                <input name="id" type="hidden" />
+                <label class="field">Owner<input name="owner" required /></label>
+                <label class="field">Survey number<input name="survey" required /></label>
+                <label class="field">Village<input name="village" required /></label>
+                <label class="field">Extent<input name="extent" required placeholder="2.4 acres" /></label>
+                <label class="field">Status
+                  <select name="status">
+                    <option>Verified</option>
+                    <option>Needs survey</option>
+                    <option>Dispute review</option>
+                  </select>
+                </label>
+                <button class="admin-button" type="submit">Save record</button>
+              </form>
+              <div class="ops-panel">
+                <div class="panel-heading">
+                  <h2>Read and manage records</h2>
+                  <input id="adminRecordSearch" type="search" placeholder="Filter records" />
+                </div>
+                <div id="adminRecordsList" class="admin-list"></div>
+              </div>
+            </div>
+          </section>
+
+          <section id="adminRequests" class="admin-view">
+            <div class="ops-grid">
+              <form id="adminRequestForm" class="ops-panel form-stack">
+                <div class="panel-heading">
+                  <h2 id="requestFormTitle">Create request</h2>
+                  <button id="cancelRequestEdit" class="ghost-button" type="button">Clear</button>
+                </div>
+                <input name="id" type="hidden" />
+                <label class="field">Citizen name<input name="name" required /></label>
+                <label class="field">Village<input name="village" required /></label>
+                <label class="field">Service type<input name="type" required /></label>
+                <label class="field">Status
+                  <select name="status">
+                    <option>Open</option>
+                    <option>Review</option>
+                    <option>Closed</option>
+                  </select>
+                </label>
+                <label class="field">Details<textarea name="details" required></textarea></label>
+                <button class="admin-button" type="submit">Save request</button>
+              </form>
+              <div class="ops-panel">
+                <div class="panel-heading">
+                  <h2>Read and manage requests</h2>
+                  <input id="adminRequestSearch" type="search" placeholder="Filter requests" />
+                </div>
+                <div id="adminRequestsList" class="admin-list"></div>
+              </div>
+            </div>
+          </section>
+
+          <section id="adminUpload" class="admin-view">
+            <div class="ops-panel upload-panel">
+              <div>
+                <h2>Upload backend data</h2>
+                <p>Upload a JSON file containing either records, requests, or both. Existing data is kept unless matching IDs are included.</p>
+              </div>
+              <label class="upload-box">
+                <input id="dataUpload" type="file" accept="application/json,.json" />
+                <span>Choose JSON data file</span>
+              </label>
+              <pre id="uploadExample">{
+  "records": [{ "owner": "Name", "survey": "12/A", "village": "Velpur", "extent": "1 acre", "status": "Verified" }],
+  "requests": [{ "name": "Citizen", "village": "Velpur", "type": "Income certificate", "details": "Need certificate", "status": "Open" }]
+}</pre>
+            </div>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" role="status"></div>
+    <script src="app.js"></script>
+  </body>
+</html>

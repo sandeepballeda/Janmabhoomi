@@ -1,0 +1,5 @@
+{
+  "entry": ["server.js", "app.js"],
+  "project": ["*.js"],
+  "ignore": ["node_modules/**", "htmlcov/**"]
+}

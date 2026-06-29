@@ -1,0 +1,29 @@
+{
+  "name": "janmabhoomi-civic-desk",
+  "version": "0.1.0",
+  "description": "Civic services prototype for land records, citizen requests, and admin workflows.",
+  "license": "AGPL-3.0-only",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "prepare": "husky",
+    "lint:js": "eslint app.js server.js",
+    "format:check": "prettier --check \"**/*.{js,css,html,json,md,yml,yaml}\"",
+    "format": "prettier --write \"**/*.{js,css,html,json,md,yml,yaml}\"",
+    "biome:check": "biome check .",
+    "oxlint": "oxlint app.js server.js",
+    "knip": "knip",
+    "audit": "npm audit --audit-level=moderate"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "eslint": "^9.18.0",
+    "husky": "^9.1.7",
+    "knip": "^5.41.1",
+    "oxlint": "^0.15.13",
+    "prettier": "^3.4.2"
+  }
+}
